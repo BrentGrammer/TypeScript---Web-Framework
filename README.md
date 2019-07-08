@@ -1,4 +1,4 @@
-# WEb Framework built using Typescript
+# Web Framework built using Typescript
 
 - Follows Stephen Grider's Typescript course on Udemy.
 
