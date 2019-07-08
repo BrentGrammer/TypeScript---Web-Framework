@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { Eventing } from './Eventing';
 
 interface UserProps {
   name?: string;
