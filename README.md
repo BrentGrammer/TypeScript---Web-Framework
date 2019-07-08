@@ -6,7 +6,7 @@
 
 - \$ npm install
 - \$ npm install -g json-server
-- Install Parcel
+- \$ npm i parcel-bundler
 - \$ npm start:db
 - \$ npm start:parcel
 
