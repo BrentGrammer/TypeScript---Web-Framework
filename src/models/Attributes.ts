@@ -16,12 +16,18 @@ export class Attributes<T> {
    *
    */
 
+  // Note: This needs to be an arrow function because it is being called off of the User object as a module method and this would
+  // point to the User instance instead of this class instance resulting in an error.
   // constraint:       // annotation and lookup:
-  get<K extends keyof T>(key: K): T[K] {
+  get = <K extends keyof T>(key: K): T[K] => {
     return this.data[key];
-  }
+  };
 
   set(updates: T): void {
     Object.assign(this.data, updates);
   }
+
+  getAll = (): T => {
+    return this.data;
+  };
 }
