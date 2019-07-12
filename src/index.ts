@@ -1,10 +1,5 @@
-import { Collection } from './models/Collection';
-import { User, UserProps } from './models/User';
+import { UserForm } from './views/UserForm';
 
-// To eliminate the need for writing verbose arguments and calling collection, make static method on the data object
-// which builds a collection for it.
-const collection = User.buildUserCollection();
+const userForm = new UserForm(document.getElementById('root'));
 
-collection.fetch();
-
-console.log(collection);
+userForm.render();
