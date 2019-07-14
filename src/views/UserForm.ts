@@ -1,13 +1,19 @@
 import { View } from './View';
+import { User, UserProps } from '../models/User';
 
 /**
  * This class responsible for rendering and setting up a specific user form view to the screen
  *
  * This is set up using inheritance pattern - the parent abstract View class containing universal View related methods and abstract
  *
+ * The parent takes two generic types, the first is required as the model and the second is required because the model requires a
+ * generic, so it is passed into the Model type in View.js as a generic argument
+ *
+ * This allows for TypeScript to know all of the methods an properties on this.model inside this class.
+ *
  */
 
-export class UserForm extends View {
+export class UserForm extends View<User, UserProps> {
   eventsMap(): { [key: string]: () => void } {
     // takes key string and splits in on colon to use the event name in addEventListener() and selector in querySelectorAll()
     return {
