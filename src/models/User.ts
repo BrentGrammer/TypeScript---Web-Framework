@@ -41,4 +41,10 @@ export class User extends Model<UserProps> {
    *
    * You can also create custom methods now that are specific to a User class but retain generic model methods through inheritance
    */
+
+  // This logic is for the click listener on the Userform view since it changes the data in the model:
+  setRandomAge(): void {
+    const age = Math.round(Math.random() * 100);
+    this.set({ age });
+  }
 }
