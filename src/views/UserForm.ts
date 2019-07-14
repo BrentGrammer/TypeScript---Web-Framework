@@ -1,24 +1,13 @@
-import { User } from '../models/User';
+import { View } from './View';
 
 /**
- * View class responsible for rendering HTML to the screen
+ * This class responsible for rendering and setting up a specific user form view to the screen
  *
- * The pattern is that a view takes in an instance of a model and uses that data to render
+ * This is set up using inheritance pattern - the parent abstract View class containing universal View related methods and abstract
  *
  */
 
-export class UserForm {
-  // Element is a global type available anywhere without importing required
-  constructor(public parent: Element, public model: User) {
-    this.bindModel();
-  }
-
-  bindModel() {
-    this.model.on('change', () => {
-      this.render();
-    });
-  }
-
+export class UserForm extends View {
   eventsMap(): { [key: string]: () => void } {
     // takes key string and splits in on colon to use the event name in addEventListener() and selector in querySelectorAll()
     return {
@@ -55,34 +44,5 @@ export class UserForm {
 
     </div>
     `;
-  }
-
-  // DocumentFragment is a builtin browser type that holds HTML in memory before it is appended to the DOM
-  bindEvents(fragment: DocumentFragment): void {
-    const eventsMap = this.eventsMap();
-
-    // for in loop iterates over keys in an object:
-    for (let eventKey in eventsMap) {
-      const [eventName, selector] = eventKey.split(':');
-
-      // returns array of matching elements off of the DocumentFragment passed in
-      fragment.querySelectorAll(selector).forEach(element => {
-        element.addEventListener(eventName, eventsMap[eventKey]);
-      });
-    }
-  }
-
-  render(): void {
-    // clear existing html in passed in parent element so multiple forms aren't created on each change
-    this.parent.innerHTML = '';
-    //  Note: A template element is something that can take a string and turn it into HTML that can be added to the DOM
-    const templateElement = document.createElement('template');
-    templateElement.innerHTML = this.template();
-
-    // NOTE: The type of the content prop is a built in DocumentFragment browser type - it's purpose is to hold HTML in memory
-    // before it is attached to the DOM
-    this.bindEvents(templateElement.content);
-
-    this.parent.append(templateElement.content);
   }
 }

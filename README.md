@@ -23,3 +23,5 @@
   The methods can be pass through methods that simply pass on the arguments to the delegated referenced object, or:
   The methods can also do some amount of coordination between the modules to get them all working together correctly.
 - Delegation using getters to return a reference to a sub module method to eliminate cumbersome maintenance if it changes. (see User.ts)
+
+- Inheritance - used in the View classes. If two classes need a two way relationship (each must reference the other), then that is a sign that Object Composition may not be the best approach - inheritance should be used instead by setting up the parent as an abstract class with universal methods and abstract method defintions that require more specific implementation on the child object inheriting from it.
