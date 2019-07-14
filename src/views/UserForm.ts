@@ -18,12 +18,13 @@ export class UserForm extends View<User, UserProps> {
     // takes key string and splits in on colon to use the event name in addEventListener() and selector in querySelectorAll()
     return {
       'click:.set-age': this.onSetAgeClick,
-      'click:.set-name': this.onSetNameClick
+      'click:.set-name': this.onSetNameClick,
+      'click:.save-model': this.onSaveModelClick
     };
   }
 
   // NOTE: Since the logic changes the model it will be put in a helper method on the model object(User.ts) and not in here (the view class)
-  // Also note that this must be an arrow function to retain correct this binding since it will be passed into a different context
+  // Also note that all event handlers should be an arrow function to retain correct this binding since it will be passed into a different context
   // and `this` will not point to the UserForm class object
   onSetAgeClick = (): void => {
     this.model.setRandomAge();
@@ -38,15 +39,18 @@ export class UserForm extends View<User, UserProps> {
     }
   };
 
+  onSaveModelClick = (): void => {
+    this.model.save();
+  };
+
   template(): string {
     return `
     <div>
-      <h1>User Form</h1>
-      <div>user name: ${this.model.get('name')}</div>
-      <div>user age: ${this.model.get('age')}</div>
-      <input />
+
+      <input placeholder="${this.model.get('name')}" />
       <button class="set-name">Change Name</button>
       <button class="set-age">Set Random Age</button>
+      <button class="save-model">Save User</button>
 
     </div>
     `;
